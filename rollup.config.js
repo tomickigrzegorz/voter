@@ -25,7 +25,8 @@ const configs = [
         'process.env.WYBORNIK_API': JSON.stringify(process.env.WYBORNIK_API),
         'process.env.WYBORNIK_MAIL': JSON.stringify(process.env.WYBORNIK_MAIL),
         'process.env.WYBORNIK_LOCAL': JSON.stringify(process.env.WYBORNIK_LOCAL),
-        'process.env.WYBORNIK_TYPE_IMAGE': JSON.stringify(process.env.WYBORNIK_TYPE_IMAGE)
+        'process.env.WYBORNIK_TYPE_IMAGE': JSON.stringify(process.env.WYBORNIK_TYPE_IMAGE),
+        'process.env.WYBORNIK_TITLE': JSON.stringify(process.env.WYBORNIK_TITLE)
       }),
       isProduction && terser(),
       copy({

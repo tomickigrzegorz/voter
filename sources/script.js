@@ -1,12 +1,17 @@
 const app = document.querySelector('.app');
 const local = process.env.WYBORNIK_LOCAL === 'TRUE' ? true : false;
 const api = process.env.WYBORNIK_API;
+const title = process.env.WYBORNIK_TITLE;
 const images = JSON.parse(localStorage.getItem('images'));
 const localStorageExist = localStorage.getItem('images');
 const tyleImages = process.env.WYBORNIK_TYPE_IMAGE;
 const arrays = tyleImages.split(',');
 
 const showImage = window.location.search === '?s=print' ? 'show' : '';
+
+// adding title
+document.title = title;
+app.dataset.name = title;
 
 async function fetchData(url) {
   try {
@@ -110,7 +115,7 @@ function getAllInputsValue() {
 
 function sendEmail(images) {
   const mail = process.env.WYBORNIK_MAIL;
-  const mailtoLink = `mailto:${mail}?subject=Zdjęcia wybrane do druku&body=${images}`;
+  const mailtoLink = `mailto:${mail}?subject=${title} - zdjęcia wybrane do druku&body=${images}`;
   const win = window.open(mailtoLink, 'mail');
   setTimeout(() => {
     win.close();
