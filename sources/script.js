@@ -3,6 +3,8 @@ const local = process.env.WYBORNIK_LOCAL === 'TRUE' ? true : false;
 const api = process.env.WYBORNIK_API;
 const images = JSON.parse(localStorage.getItem('images'));
 const localStorageExist = localStorage.getItem('images');
+const tyleImages = process.env.WYBORNIK_TYPE_IMAGE;
+const arrays = tyleImages.split(',');
 
 const showImage = window.location.search === '?s=print' ? 'show' : '';
 
@@ -22,26 +24,30 @@ fetchData(api)
   .then(createButtonSendEmail)
 
 
+function sizeImages(image) {
+  return arrays.map(type => `
+    <div class="15-18">
+      <label>${type}</label>
+      <input type="number" name="${type}-${image}" min="0"> szt.
+    </div>`).join('')
+}
+
 const template = (image) => {
   const imgPath = local ? image : `images/${image}`;
+  const imageSize = sizeImages(image);
   const temp = `
     <div class="item" data-image-name="${image}">
       <img loading="lazy" class="img-zoom" data-zoomed="false" width="1600px" height="1067px" src="${imgPath}">
       <div class="number-images ${showImage}">
         <div class="image-name">${image}</div>
-        <div class="15-18">
-          <label>15x10</label>
-          <input type="number" name="15x10-${image}" min="0"> szt.
-        </div>
-        <div class="15-23">
-          <label>15x23</label>
-          <input type="number" name="15x23-${image}" min="0"> szt.
-        </div>
+        ${imageSize}
       </div>
     </div>`;
 
   return temp;
 }
+
+
 
 function addToSiteImages(data) {
   data.map(item => {

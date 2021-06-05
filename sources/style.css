@@ -19,7 +19,7 @@ body {
   padding: 5px;
   font-weight: 400;
   min-height: 100%;
-  font-size: calc(16px + 0.25vw);
+  font-size: calc(14px + 0.25vw);
   position: relative;
 }
 
