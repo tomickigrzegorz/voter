@@ -35,6 +35,13 @@ yarn prod
 npm run prod
 ```
 
+## How to generate json file with images
+```bash
+yarn json
+# or
+npm run json
+```
+
 ## Two versions of the site
 We have access to two layouts of this page. After starting the first one, we enable the second one by adding `?s=print` to the url address.  
 This parameter changes the look by adding a photo size selection box and a `send email` button.  
