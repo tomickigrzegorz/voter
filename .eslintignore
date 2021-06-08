@@ -1,5 +1,4 @@
-dist/
+.gitignore
+config/
+docs/
 node_modules/
-index.html
-rollup.config.js
-.eslintrc.js

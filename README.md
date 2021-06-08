@@ -41,8 +41,3 @@ yarn json
 # or
 npm run json
 ```
-
-## Two versions of the site
-We have access to two layouts of this page. After starting the first one, we enable the second one by adding `?s=print` to the url address.  
-This parameter changes the look by adding a photo size selection box and a `send email` button.  
-Clicking on the button collects all information about the number and size of photos and opens the default e-mail program.
