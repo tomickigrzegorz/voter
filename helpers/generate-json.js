@@ -1,6 +1,6 @@
 const { readdir, writeFileSync } = require('fs');
 
-const imagesDir = './images';
+const imagesDir = './sources/images';
 const arrayImages = [];
 
 readdir(`${imagesDir}`, function (err, files) {

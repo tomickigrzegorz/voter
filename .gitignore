@@ -1,5 +1,7 @@
 node_modules/
 dist/
-images/
 .env.prod
 index.html
+
+sources/images/*
+!sources/images/.gitkeep

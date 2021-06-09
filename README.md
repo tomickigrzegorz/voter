@@ -1,11 +1,34 @@
 ## WYBORNIK
-The site can be useful for photographers. You provide photos to the client who selects the size and number of photos for printing.
 
-<img src="wybornik-example.png">
+<img src="https://img.shields.io/github/package-json/v/tomik23/wybornik">
+<img src="https://img.shields.io/badge/License-MIT-green.svg">
+
+The site can be useful for photographers. You provide photos to the client who selects the size and number of photos for printing.  
+
+Selected photos can be generated to a csv file and sent to the photographer ;)
+
+Everything is saved in localStorage, so even closing or refreshing the page does not remove the selected photos.
+
 
 ## What you will need
-The `images` folder with photos in the main folder.
-In the main folder there should also be two configuration files: `.env.dev` and `.env.prod`
+The `images` folder with photos in the sources folder.
+Photo list - images.json  
+The main folder there should also be two configuration files: `.env.dev` and `.env.prod`
+
+```bash
+# tiitle site
+WYBORNIK_TITLE=WYCIECZKA
+
+# address to json file dev
+WYBORNIK_API=http://localhost:3000/images
+
+# based on this variable you set the path to the photos
+# prod WYBORNIK_LOCAL=FALSE 
+WYBORNIK_LOCAL=TRUE 
+
+# images sizes
+WYBORNIK_TYPE_IMAGE=15x10,15x23
+```
 
 The `.env.prod` file should contain production data
 
@@ -41,3 +64,14 @@ yarn json
 # or
 npm run json
 ```
+
+## The appearance of the site
+
+### Look after entering
+<img src="static/off.png">
+
+### Appearance after turning on the selection of the number and size of photos
+<img src="static/on.png">
+
+### List of selected photos, sizes and quantities
+<img src="static/show-selected-images.png">
