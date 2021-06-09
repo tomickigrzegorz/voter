@@ -1,7 +1,6 @@
 ## WYBORNIK
 
-<img src="https://img.shields.io/github/package-json/v/tomik23/wybornik">
-<img src="https://img.shields.io/badge/License-MIT-green.svg">
+<img src="https://img.shields.io/github/package-json/v/tomik23/wybornik"> <img src="https://img.shields.io/badge/License-MIT-green.svg">
 
 The site can be useful for photographers. You provide photos to the client who selects the size and number of photos for printing.  
 
