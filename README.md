@@ -12,14 +12,15 @@ Everything is saved in localStorage, so even closing or refreshing the page does
 
 ## What you will need
 The `images` folder with photos in the sources folder.
-Photo list - images.json  
+Photo list - `images.json`, see in the sources folder.  
 The main folder there should also be two configuration files: `.env.dev` and `.env.prod`
 
 ```bash
 # tiitle site
 WYBORNIK_TITLE=WYCIECZKA
 
-# address to json file dev
+# in development version, json is served from json-server
+# on production it must be a link to the static images.json file
 WYBORNIK_API=http://localhost:3000/images
 
 # based on this variable you set the path to the photos
