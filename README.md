@@ -8,6 +8,9 @@ Selected photos can be generated to a csv file and sent to the photographer ;)
 
 Everything is saved in localStorage, so even closing or refreshing the page does not remove the selected photos.
 
+## Demo
+
+See the demo - [example](https://tomik23.github.io/wybornik/)
 
 ## What you will need
 The `images` folder with photos in the sources folder.
