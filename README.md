@@ -25,8 +25,6 @@ WYBORNIK_TITLE=WYCIECZKA
 WYBORNIK_TYPE_IMAGE=15x10,15x23
 ```
 
-The `.env.prod` file should contain production data
-
 ## Clone the repo and install dependencies
 ```bash
 git clone https://github.com/tomik23/wybornik.git
