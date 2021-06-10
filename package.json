@@ -14,8 +14,7 @@
     "prod": "yarn webpack:prod",
     "webpack:dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js --progress",
     "webpack:prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js --progress",
-    "json": "node ./helpers/generate-json.js",
-    "server": "node server.js"
+    "json": "node ./helpers/generate-json.js"
   },
   "browserslist": {
     "production": [
@@ -48,7 +47,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "html-webpack-plugin": "^5.3.1",
-    "json-server": "^0.16.3",
     "mini-css-extract-plugin": "^1.6.0",
     "postcss": "^8.2.14",
     "postcss-loader": "^5.2.0",

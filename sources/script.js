@@ -1,9 +1,6 @@
 const app = document.querySelector('.app');
-const local = process.env.WYBORNIK_LOCAL === 'TRUE' ? true : false;
-const api = process.env.WYBORNIK_API;
 const title = process.env.WYBORNIK_TITLE;
 const images = JSON.parse(localStorage.getItem('images'));
-const localStorageExist = localStorage.getItem('images');
 const tyleImages = process.env.WYBORNIK_TYPE_IMAGE;
 const arrays = tyleImages.split(',');
 
@@ -14,13 +11,13 @@ async function fetchData(url) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return local ? data : data.images;
+    return data;
   } catch (err) {
     console.error(err);
   }
 };
 
-fetchData(api)
+fetchData('./images.json')
   .then(data => addToSiteImages(data))
   .then(createTitle)
   .then(setValueNumber)
@@ -101,10 +98,10 @@ const template = (image) => {
 
 
 
-function addToSiteImages(data) {
-  data.map(item => {
+function addToSiteImages(array) {
+  array.forEach(item => {
     app.insertAdjacentHTML('beforeend', template(item.image))
-  })
+  });
 };
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -247,8 +244,7 @@ function sendEmail(images) {
 }
 
 function setValueNumber() {
-  if (!localStorageExist) return;
-
+  if (!images) return;
   images.forEach(image => {
     let element = document.querySelector(`input[name="${image.name}"]`);
     element.value = image.value;
