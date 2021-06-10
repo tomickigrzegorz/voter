@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const baseConfig = require('./webpack.common.js');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -7,9 +6,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const dotenv = require('dotenv');
-
-const config = dotenv.config({ path: './.env.prod' });
 
 // common part for production and dev
 const { cssLoaders } = require('./util');
@@ -82,13 +78,5 @@ module.exports = merge(baseConfig, {
     new MiniCssExtractPlugin(
       configureMiniCssExtract()
     ),
-
-    // we create a global variable that
-    // we use in pug and we can use in js
-    // https://webpack.js.org/plugins/define-plugin/
-    // In pug - var DATA = self.htmlWebpackPlugin.options.DATA
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(config.parsed)
-    }),
   ]
 });

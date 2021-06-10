@@ -1,10 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.common.js');
-const dotenv = require('dotenv');
 const { merge } = require('webpack-merge');
-
-const config = dotenv.config({ path: './.env.dev' });
 
 // common part for production and dev
 const { cssLoaders } = require('./util');
@@ -49,13 +46,5 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-
-    // we create a global variable that
-    // we use in pug and we can use in js
-    // https://webpack.js.org/plugins/define-plugin/
-    // In pug - var DATA = self.htmlWebpackPlugin.options.DATA
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(config.parsed)
-    }),
   ]
 });

@@ -1,7 +1,8 @@
 node_modules/
 .env.prod
 
-test-images/*
+
+sources/test-images/
 
 sources/images/*
 !sources/images/.gitkeep

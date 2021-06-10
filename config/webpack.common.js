@@ -1,7 +1,8 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotenv = require('dotenv');
-const config = dotenv.config({ path: './.env.prod' });
+const config = dotenv.config();
 
 module.exports = {
   entry: {
@@ -28,6 +29,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: config.parsed.WYBORNIK_TITLE,
       template: 'sources/index.html'
-    })
+    }),
+    // we create a global variable that
+    // we use in pug and we can use in js
+    // https://webpack.js.org/plugins/define-plugin/
+    // In pug - var DATA = self.htmlWebpackPlugin.options.DATA
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(config.parsed)
+    }),
   ]
 };
