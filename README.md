@@ -59,14 +59,3 @@ yarn json
 # or
 npm run json
 ```
-
-## The appearance of the site
-
-### Look after entering
-<img src="static/off.png">
-
-### Appearance after turning on the selection of the number and size of photos
-<img src="static/on.png">
-
-### List of selected photos, sizes and quantities
-<img src="static/show-selected-images.png">
