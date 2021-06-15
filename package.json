@@ -1,6 +1,6 @@
 {
   "name": "wybornik",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/script.js",
   "description": "A simple way to select photos and their size. Useful for photographers.",
   "license": "MIT",
