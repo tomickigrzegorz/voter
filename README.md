@@ -19,10 +19,21 @@ The main folder there should also be configuration files: `.env`
 
 ```bash
 # tiitle site
-WYBORNIK_TITLE=WYCIECZKA
+WYBORNIK_TITLE=TRIP
 
 # images sizes
 WYBORNIK_TYPE_IMAGE=15x10,15x23
+
+# remove localStorage
+WYBORNIK_CLEAR=Czy napewno chcesz usunąć zaznaczone zdjęcia?
+
+# generate svg button
+WYBORNIK_GENERATE_CSV=generuj csv ze zdjęciami
+
+# all byttons title
+WYBORNIK_TITLE_CLEAR=Wyczyść wszystkie zdjęcia
+WYBORNIK_TITLE_SHOW_SIZE_IMAGES=Pokaż wielkości zdjęć
+WYBORNIK_TITLE_SHOW_SELECTED_IMAGES=Pokaż wybrane zdjęcia
 ```
 
 ## Clone the repo and install dependencies
