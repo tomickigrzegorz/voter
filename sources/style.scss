@@ -77,7 +77,6 @@ svg {
   left: -5px;
   right: -5px;
   margin: auto;
-  text-align: center;
   text-transform: uppercase;
   letter-spacing: 5px;
   display: block;
@@ -87,10 +86,14 @@ svg {
   width: 100%;
   box-shadow: 0 0 20px rgba(250, 126, 112, 0.4);
   border-bottom: 1px solid #fdb6ae;
+  @media (min-width: 600px) {
+    text-align: center;
+  }
 }
 
 .size-button,
-.show-images {
+.show-images,
+.clear-base {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,6 +115,14 @@ svg {
 
   &:hover svg {
     fill: salmon;
+  }
+
+  &.active {
+    background: #fff;
+    border: 1px solid salmon;
+    svg {
+      fill: salmon;
+    }
   }
 }
 
@@ -247,7 +258,7 @@ svg {
   justify-content: center;
   align-items: center;
   top: -10px;
-  left: 55px;
+  right: -15px;
   border-radius: 4px;
   padding: 4px 10px;
   background: salmon;
