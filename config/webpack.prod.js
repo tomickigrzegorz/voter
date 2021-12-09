@@ -11,29 +11,27 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { cssLoaders } = require('./util');
 
 // configure Optimization
-const configureOptimization = () => {
-  return {
-    minimize: true,
-    minimizer: [new TerserPlugin()]
-  }
-}
+const configureOptimization = {
+  minimize: true,
+  minimizer: [new TerserPlugin()],
+};
 
 // configure MiniCssExtract
-const configureMiniCssExtract = () => {
-  return {
-    filename: '[name].[fullhash].css'
-  }
-}
+const configureMiniCssExtract = [
+  {
+    filename: '[name].[fullhash].css',
+  },
+];
 
 // configure Copy
 const configureCopy = () => {
   return {
     patterns: [
       {
-        from: 'sources/images.json'
+        from: 'sources/images.json',
       },
-    ]
-  }
+    ],
+  };
 };
 
 module.exports = merge(baseConfig, {
@@ -53,30 +51,32 @@ module.exports = merge(baseConfig, {
               publicPath: '../../',
             },
           },
-          ...cssLoaders
+          ...cssLoaders,
         ],
       },
     ],
   },
-  optimization: configureOptimization(),
   plugins: [
-    // when we run the production build then 
+    // when we run the production build then
     // the docs folder is cleared
     new CleanWebpackPlugin({
       dry: false,
-      verbose: true
+      verbose: true,
     }),
 
     // we copy all necessary graphic files
     // and assets to build folder
-    new CopyWebpackPlugin(
-      configureCopy()
-    ),
+    new CopyWebpackPlugin(configureCopy()),
 
     // we extract scss files from js and create
     // separate files for individual pages
-    new MiniCssExtractPlugin(
-      configureMiniCssExtract()
-    ),
-  ]
+    new MiniCssExtractPlugin(...configureMiniCssExtract),
+  ],
+  optimization: { ...configureOptimization },
+  performance: {
+    // https://webpack.js.org/configuration/performance/#performancehints
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
 });

@@ -1,7 +1,7 @@
 const app = document.querySelector('.app');
-const title = process.env.WYBORNIK_TITLE;
+const title = process.env.VOTER_TITLE;
 const images = JSON.parse(localStorage.getItem('images'));
-const tyleImages = process.env.WYBORNIK_TYPE_IMAGE;
+const tyleImages = process.env.VOTER_TYPE_IMAGE;
 const arrays = tyleImages.split(',');
 
 // adding title
@@ -15,15 +15,14 @@ async function fetchData(url) {
   } catch (err) {
     console.error(err);
   }
-};
+}
 
 fetchData('./images.json')
-  .then(data => addToSiteImages(data))
+  .then((data) => addToSiteImages(data))
   .then(createTitle)
   .then(setValueNumber)
   .then(createButtonSendEmail)
-  .then(allImagesSelected)
-
+  .then(allImagesSelected);
 
 function createTitle() {
   const titleWrapper = document.createElement('div');
@@ -60,18 +59,18 @@ function createButtons(buttonGroup) {
     {
       name: 'clear-base',
       svg: 'clear',
-      title: process.env.WYBORNIK_TITLE_CLEAR
+      title: process.env.VOTER_TITLE_CLEAR,
     },
     {
       name: 'size-button',
       svg: 'size',
-      title: process.env.WYBORNIK_TITLE_SHOW_SIZE_IMAGES
+      title: process.env.VOTER_TITLE_SHOW_SIZE_IMAGES,
     },
     {
       name: 'show-images',
       svg: 'image',
-      title: process.env.WYBORNIK_TITLE_SHOW_SELECTED_IMAGES
-    }
+      title: process.env.VOTER_TITLE_SHOW_SELECTED_IMAGES,
+    },
   ];
   buttons.map(({ name, svg, title }) => {
     let buttonElement = document.createElement('button');
@@ -79,7 +78,7 @@ function createButtons(buttonGroup) {
     buttonElement.title = title;
     buttonElement.innerHTML = svgUse(svg);
     buttonGroup.insertAdjacentElement('beforeend', buttonElement);
-  })
+  });
 }
 
 function svgUse(name) {
@@ -95,18 +94,24 @@ function allImagesSelected() {
 }
 
 function sizeImages(image) {
-  return arrays.map(type => `
+  return arrays
+    .map(
+      (type) => `
     <div id="image-number">
       <label>${type}</label>
       <input type="number" name="${type}-${image}" min="0"> szt.
-    </div>`).join('')
+    </div>`
+    )
+    .join('');
 }
 
 const template = (image) => {
   const imgPath = `images/${image}`;
   const imageSize = sizeImages(image);
   const temp = `
-    <div class="item" id="${image}" data-image-name="${image}">
+    <div class="item" id="${image}" data-image-name="${image.substring(
+    image.indexOf('-') + 1
+  )}">
       <img loading="lazy" class="img-zoom" data-zoomed="false" width="1600px" height="1067px" src="${imgPath}">
       <div class="number-images">
         <div class="image-name">${image}</div>
@@ -115,14 +120,13 @@ const template = (image) => {
     </div>`;
 
   return temp;
-}
-
+};
 
 function addToSiteImages(array) {
-  array.forEach(item => {
-    app.insertAdjacentHTML('beforeend', template(item.image))
+  array.forEach((item) => {
+    app.insertAdjacentHTML('beforeend', template(item.image));
   });
-};
+}
 
 window.addEventListener('DOMContentLoaded', function () {
   new Zooom('img-zoom', {
@@ -132,14 +136,16 @@ window.addEventListener('DOMContentLoaded', function () {
     },
   });
 
-  let arrayImages = localStorage.getItem('images') ? JSON.parse(localStorage.getItem('images')) : [];
+  let arrayImages = localStorage.getItem('images')
+    ? JSON.parse(localStorage.getItem('images'))
+    : [];
 
   document.addEventListener('change', (e) => {
     if (e.target.type === 'number') {
       const { name, value } = e.target;
       const type = { name, value };
 
-      let item = arrayImages.find(img => img.name === name);
+      let item = arrayImages.find((img) => img.name === name);
 
       if (item) {
         item.value = value;
@@ -151,7 +157,7 @@ window.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('images', JSON.stringify(arrayImages));
 
     setToSelectedImages(arrayImages);
-  })
+  });
 
   getAllInputsValue();
 
@@ -171,9 +177,12 @@ function setToSelectedImages(arrays) {
   const ulList = document.createElement('ul');
   ulList.className = 'list-of-images';
 
-  arrays.forEach(array => {
+  arrays.forEach((array) => {
     if (array.value !== '' && array.value !== '0') {
-      ulList.innerHTML += `<li data-img="${array.name.replace(/.+\-/g, '')}" class="img-element">${array.name} | ${array.value} szt.</li>`;
+      ulList.innerHTML += `<li data-img="${array.name.replace(
+        /.+\-/g,
+        ''
+      )}" class="img-element">${array.name} | ${array.value} szt.</li>`;
       count += parseInt(array.value);
     }
   });
@@ -190,7 +199,7 @@ function countElement(count) {
   }
   const showImages = document.querySelector('.show-images');
   const countElement = document.createElement('div');
-  countElement.className = 'count-images'
+  countElement.className = 'count-images';
   countElement.textContent = count;
 
   document.body.dataset.count = count;
@@ -202,11 +211,10 @@ function countElement(count) {
   document.addEventListener('click', (event) => {
     event.preventDefault();
     if (event.target.className === 'img-element') {
-
       const actives = document.querySelectorAll('.active');
-      actives.forEach(activeImg => {
+      actives.forEach((activeImg) => {
         activeImg.classList.remove('active');
-      })
+      });
 
       const imgID = event.target.dataset.img;
       const element = document.querySelector(`[data-image-name="${imgID}"]`);
@@ -217,7 +225,7 @@ function countElement(count) {
 
       scroll({
         top: element.offsetTop,
-        behavior: "smooth"
+        behavior: 'smooth',
       });
     }
 
@@ -236,14 +244,14 @@ function countElement(count) {
 
     if (event.target.classList.contains('clear-base')) {
       event.target.classList.toggle('active');
-      if (window.confirm(process.env.WYBORNIK_CLEAR)) {
+      if (window.confirm(process.env.VOTER_CLEAR)) {
         localStorage.clear();
         location.reload();
       } else {
         event.target.classList.remove('active');
       }
     }
-  })
+  });
 })();
 
 function getAllInputsValue() {
@@ -252,12 +260,15 @@ function getAllInputsValue() {
     if (e.target.classList.contains('send-email')) {
       const inputs = document.querySelectorAll('input[type="number"]');
 
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         if (input.value !== '' && input.value !== '0') {
           const type = input.name.split('-')[0];
-          const name = input.name.split('-')[1];
+          const name = input.name.substring(input.name.indexOf('-') + 1);
 
           const array = [name, type, input.value];
+          // const name = input.name.split('-')[1];
+
+          // const array = [name, type, input.value];
           imagesList.push(array);
         }
       });
@@ -267,12 +278,12 @@ function getAllInputsValue() {
       }
     }
     imagesList = [];
-  })
+  });
 }
 
 function sendEmail(images) {
-  let csvContent = "data:text/csv;charset=utf-8,"
-    + images.map(e => e.join(",")).join("\n");
+  let csvContent =
+    'data:text/csv;charset=utf-8,' + images.map((e) => e.join(',')).join('\n');
 
   const hiddenElement = document.createElement('a');
   hiddenElement.href = encodeURI(csvContent);
@@ -283,7 +294,7 @@ function sendEmail(images) {
 
 function setValueNumber() {
   if (!images) return;
-  images.forEach(image => {
+  images.forEach((image) => {
     let element = document.querySelector(`input[name="${image.name}"]`);
     element.value = image.value;
   });
@@ -292,6 +303,6 @@ function setValueNumber() {
 function createButtonSendEmail() {
   const button = document.createElement('button');
   button.className = `send-email`;
-  button.textContent = process.env.WYBORNIK_GENERATE_CSV
-  app.insertAdjacentElement('beforeend', button);
+  button.textContent = process.env.VOTER_GENERATE_CSV;
+  app.insertAdjacentElement('afterend', button);
 }
