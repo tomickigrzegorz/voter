@@ -106,13 +106,12 @@ function sizeImages(image) {
 }
 
 const template = (image) => {
-  const imgPath = `images/${image}`;
   const imageSize = sizeImages(image);
   const temp = `
     <div class="item" id="${image}" data-image-name="${image.substring(
     image.indexOf('-') + 1
   )}">
-      <img loading="lazy" class="img-zoom" data-zoomed="false" width="1600px" height="1067px" src="${imgPath}">
+      <img data-zooom-big="https://grzegorztomicki.pl/images/kilkudniowa-wycieczka/1200/${image}" loading="lazy" class="img-zoom" data-zoomed="false" width="1600px" height="1067px" src="https://grzegorztomicki.pl/images/kilkudniowa-wycieczka/576/${image}">
       <div class="number-images">
         <div class="image-name">${image}</div>
         ${imageSize}
@@ -129,13 +128,6 @@ function addToSiteImages(array) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-  new Zooom('img-zoom', {
-    overlay: {
-      color: '#edebe7',
-      opacity: 90,
-    },
-  });
-
   let arrayImages = localStorage.getItem('images')
     ? JSON.parse(localStorage.getItem('images'))
     : [];
@@ -306,3 +298,33 @@ function createButtonSendEmail() {
   button.textContent = process.env.VOTER_GENERATE_CSV;
   app.insertAdjacentElement('afterend', button);
 }
+
+new Zooom('img-zoom', {
+  cursor: {
+    in: 'var(--zoom-in)',
+    out: 'var(--zoom-out)',
+  },
+  overlay: 'rgba(237, 235, 231, 0.9)',
+  onResize: function () {
+    // we set the page width from which it will
+    // be possible to click on the image
+    let responsiveMin = 653;
+
+    // we check the width of the browser window
+    const windowWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+
+    // we return the boolean value 'true/false'
+    // the value 'true' blocks clicking the image
+    const widthWindow = windowWidth < responsiveMin ? true : false;
+
+    // I set different cursors depending on the width of the window
+    const root = document.documentElement;
+    root.style.setProperty('--zoom-in', widthWindow ? 'default' : 'zoom-in');
+    root.style.setProperty('--zoom-out', widthWindow ? 'default' : 'zoom-out');
+
+    return widthWindow;
+  },
+});
