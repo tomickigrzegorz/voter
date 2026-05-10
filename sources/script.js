@@ -111,7 +111,7 @@ const template = (image) => {
     <div class="item" id="${image}" data-image-name="${image.substring(
     image.indexOf('-') + 1
   )}">
-      <img data-zooom-big="https://grzegorztomicki.pl/images/kilkudniowa-wycieczka/1200/${image}" loading="lazy" class="img-zoom" data-zoomed="false" width="1600px" height="1067px" src="https://grzegorztomicki.pl/images/kilkudniowa-wycieczka/576/${image}">
+      <img data-zooom-big="./images/full/${image}" loading="lazy" class="img-zoom" data-zoomed="false" src="./images/576/${image}">
       <div class="number-images">
         <div class="image-name">${image}</div>
         ${imageSize}
@@ -304,7 +304,7 @@ new Zooom('img-zoom', {
     in: 'var(--zoom-in)',
     out: 'var(--zoom-out)',
   },
-  overlay: 'rgba(237, 235, 231, 0.9)',
+  overlay: 'rgba(0, 0, 0, 0.9)',
   onResize: function () {
     // we set the page width from which it will
     // be possible to click on the image

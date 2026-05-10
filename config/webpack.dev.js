@@ -14,8 +14,8 @@ const configureDevServer = {
   },
   open: true,
   port: 3000,
-  hot: true,
   liveReload: true,
+  hot: true,
 };
 
 module.exports = merge(baseConfig, {
